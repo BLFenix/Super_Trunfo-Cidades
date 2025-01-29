@@ -47,7 +47,7 @@ void ParaMaiuscula(char Variavel[])
 
 // Função que mostra o resultado das batalhas
 
-int MostrarResultadoBatalha(char Bat_Carac[50], float Bat_Campo1, float Bat_Campo2, char Bat_Nome1[20], char Bat_Nome2[20], int *Guer1_PTS, int *Guer2_PTS)
+void MostrarResultadoBatalha(char Bat_Carac[50], float Bat_Campo1, float Bat_Campo2, char Bat_Nome1[20], char Bat_Nome2[20], int *Guer1_PTS, int *Guer2_PTS)
 {
     if (Bat_Campo1 > Bat_Campo2)
     {

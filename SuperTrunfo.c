@@ -196,6 +196,8 @@ int main()
                 ExibirCarta(cidades[i]);
             }
 
+            // Mínimo duas cidades para jogar
+
             if (NumCidades < 2)
             {
                 printf("\nPara conseguir batalhar com as cartas, deve-se ter pelo menos duas.\n");
@@ -314,6 +316,8 @@ int main()
 
                 int ListCaracBat[QuantCaracBat];
 
+                // Dá as opções de características a se escolher
+
                 printf("\nAnalise as características e, à seguir, escolha segundo a quantidade selecionada:\n");
                 printf("\n1 - População");
                 printf("\n2 - Area");
@@ -341,7 +345,7 @@ int main()
                     ListCaracBat[i] = NumCaracBat;
                 }
 
-                // Preparando os dados para enviar para a função
+                // Realizando a batalha entre cada característica das cartas
 
                 printf("\n\n***** A seguir estarão os resultados da batalha de cartas *****\n\n");
 

@@ -103,7 +103,7 @@ Agradecemos às seguintes pessoas que contribuíram para este projeto:
   <tr>
     <td align="center">
       <a href="#" title="Gabriel">
-        <img src="https://avatars.githubusercontent.com/u/00000000" width="100px;" alt="https://github.com/BLFenix.png"/><br>
+        <img src="https://github.com/BLFenix" width="100px;" alt="https://avatars.githubusercontent.com/u/126727811?v=4"/><br>
         <sub>
           <b>Gabriel Ramos</b>
         </sub>

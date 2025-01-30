@@ -10,7 +10,7 @@ Bem-vindo ao **Super Trunfo de Cidades**, um jogo interativo no qual cidades bra
    - Cada carta contém informações detalhadas sobre uma cidade, incluindo:
      - Estado
      - Nome
-     - Código (Ex.: A01, A02)
+     - Código (Uma letra de A a H para o estado e um número de 01 a 04 para cada uma das 4 cidades de cada estado. Ex.: A01, A02)
      - População
      - Área (em km²)
      - PIB (em reais)
@@ -112,7 +112,7 @@ Agradecemos às seguintes pessoas que contribuíram para este projeto:
   <tr>
     <td align="center">
       <a href="#" title="Gabriel Ramos">
-        <img src="https://avatars.githubusercontent.com/u/00000000" width="100px;" alt="Foto do Contribuidor"/><br>
+        <img src="https://avatars.githubusercontent.com/u/00000000" width="100px;" alt=""/><br>
         <sub>
           <b>Gabriel Ramos</b>
         </sub>

@@ -1,74 +1,95 @@
-# ⚠️ Importante!!!
-Você pode escolher qualquer um dos desafios para desenvolver. Sinta-se à vontade para começar pelo desafio que mais lhe interessa.
+# Super Trunfo de Cidades
 
-# Desafio Super Trunfo - Países - Comparação das Cartas
+Bem-vindo ao **Super Trunfo de Cidades**, um jogo interativo no qual cidades brasileiras competem entre si com base em características socioeconômicas e territoriais.
 
-Bem-vindo ao desafio "Super Trunfo - Países"! Neste projeto, você desenvolverá um sistema para comparar cartas baseadas em atributos de cidades. O desafio é dividido em três níveis: Novato, Aventureiro e Mestre. Cada nível adiciona novas funcionalidades e complexidades, permitindo um aprendizado progressivo.
+## Regras do Jogo
 
-## 🏅 Nível Novato
+1. **Cadastro de Cartas:**
 
-No nível Novato, você começará implementando a lógica básica de comparação entre cartas utilizando estruturas de decisão `if` e `if-else`.
+   - O jogador pode cadastrar até 8 cartas de cidades.
+   - Cada carta contém informações detalhadas sobre uma cidade, incluindo:
+     - Estado
+     - Nome
+     - Código (Ex.: A01, A02)
+     - População
+     - Área (em km²)
+     - PIB (em reais)
+     - Número de pontos turísticos
+     - Densidade populacional
+     - PIB per capita
+     - Super poder calculado com base nos atributos anteriores.
 
-### 🚩 Objetivos:
-- **Cadastro de Cartas:** O sistema permitirá ao usuário cadastrar cartas de cidades, incluindo informações como estado, código da carta, nome da cidade, população, área, PIB e número de pontos turísticos.
-- **Comparação de Cartas:** O sistema comparará os atributos de duas cartas e determinará a vencedora com base em uma propriedade específica (população, área, PIB, etc.), escolhida no código.
-- **Exibição de Resultados:** Após a comparação, o sistema exibirá qual carta venceu com base na regra: maior valor vence, exceto em densidade populacional, onde o menor valor é o vencedor.
+2. **Visualização de Cartas:**
 
-### 📥 Entrada de Dados:
-- Os dados das cartas serão inseridos manualmente via terminal.
-- O sistema solicitará interativamente as informações de cada carta.
+   - As cartas cadastradas podem ser visualizadas de forma completa ou apenas com nome e código.
 
-### 📤 Saída de Dados:
-- Após o cadastro, as propriedades da cidade serão exibidas de forma organizada.
-- O resultado da comparação será mostrado, indicando a carta vencedora.
+3. **Batalhas:**
 
----
+   - Escolha duas cidades para batalhar.
+   - Escolha até 7 características para definir o vencedor, incluindo:
+     1. População
+     2. Área
+     3. PIB
+     4. Número de pontos turísticos
+     5. Densidade populacional
+     6. PIB per capita
+     7. Super poder
+   - O jogo apresenta o vencedor com base em cada característica comparada.
+   - A cidade com mais pontos ao final das comparações vence a batalha.
 
-## 🏅 Nível Aventureiro
+4. **Empate:**
 
-No nível Aventureiro, você expandirá o sistema para incluir a comparação aninhada e a criação de um menu interativo usando `switch`.
+   - Se ambas as cidades obtiverem a mesma pontuação, ocorre um empate.
 
-### 🆕 Diferença em relação ao Nível Novato:
-- **Menu Interativo:** O usuário poderá escolher diferentes atributos para comparação através de um menu.
-- **Comparação Aninhada:** Implementação de lógica de comparação mais complexa, utilizando estruturas aninhadas para tomar decisões baseadas em múltiplos atributos.
+## Funcionalidades
 
-### 🚩 Novas Funcionalidades:
-- **Cadastro de Cartas:** Similar ao nível Novato, com a adição de comparação de múltiplos atributos.
-- **Menu Interativo:** Uso de `switch` para criar um menu que permite ao jogador escolher os atributos a serem comparados.
-- **Exibição de Resultados:** O sistema exibirá o resultado da comparação, indicando qual carta venceu e qual atributo foi utilizado.
+- **Cadastro dinâmico:**
+  - Permite ao jogador cadastrar cidades de forma iterativa.
+- **Visualização flexível:**
+  - Opção de exibir cartas completas ou apenas informações básicas.
+- **Batalha personalizada:**
+  - Escolha livre das características a serem comparadas.
+- **Cálculo inteligente:**
+  - Densidade populacional e PIB per capita são calculados automaticamente.
+- **Super poder:**
+  - Um atributo que combina múltiplas características para uma competição mais ampla.
 
----
+## Exemplo de Carta
 
-## 🏅 Nível Mestre
+```
+Estado: São Paulo
+Nome: Campinas
+Código: SP01
+População: 1.223.237 pessoas
+Área: 795.69 km²
+PIB: R$ 128.987,32
+Pontos turísticos: 5
+Densidade populacional: 1536.48 pessoas por km²
+PIB per capita: R$ 105.45 por pessoa
+Super poder: 3000.00 pontos
+```
 
-No nível Mestre, o desafio se intensifica com a adição de funcionalidades avançadas, como menus dinâmicos e lógica de decisão complexa com operadores ternários.
+## Como Jogar
 
-### 🆕 Diferença em relação ao Nível Aventureiro:
-- **Escolha de Dois Atributos:** O usuário poderá escolher dois atributos para comparação entre as cartas.
-- **Lógica de Decisão Complexa:** Implementação de estruturas de decisão aninhadas e encadeadas, além do uso de operadores ternários para determinar a carta vencedora.
-- **Menus Dinâmicos:** Os menus serão dinâmicos, permitindo uma navegação fluida entre as opções de comparação.
+1. Inicie o jogo executando o programa.
+2. Cadastre suas cidades.
+3. Visualize as cartas criadas.
+4. Escolha duas cartas para batalhar.
+5. Defina as características em disputa.
+6. Acompanhe o resultado da batalha.
+7. Escolha continuar batalhando ou cadastrar novas cidades.
 
-### 🚩 Novas Funcionalidades:
-- **Comparação de Dois Atributos:** O sistema comparará dois atributos simultaneamente para determinar a carta vencedora.
-- **Lógica Avançada:** Uso de operadores ternários e lógica aninhada para lidar com comparações complexas.
-- **Empates:** O sistema será capaz de lidar com empates, exibindo mensagens apropriadas.
-- **Exibição de Resultados:** Exibição dos resultados das comparações de forma clara e interativa.
+## Notas Técnicas
 
----
+- O programa foi desenvolvido em **C** com foco em manipulação de estruturas e funções.
+- A função `ExibirCarta()` apresenta os dados completos de uma cidade.
+- Funções auxiliares, como `ParaMaiuscula()` e `MostrarResultadoBatalha()`, ajudam na manipulação de strings e exibição de resultados.
 
-## 📋 Requisitos Funcionais Comuns
-- **Cadastro de Cartas:** O sistema deve permitir o cadastro de cartas com as informações necessárias.
-- **Comparação:** O sistema deve comparar as cartas e determinar a vencedora com base nas regras estabelecidas.
-- **Exibição de Resultados:** Os resultados devem ser exibidos de forma clara, indicando a carta vencedora.
+## Melhorias Futuras
 
-## 📌 Requisitos Não Funcionais Comuns
-- **Usabilidade:** A interface do usuário deve ser simples e intuitiva.
-- **Performance:** O sistema deve executar operações sem atrasos perceptíveis.
-- **Manutenibilidade:** O código deve ser bem estruturado e documentado.
-- **Confiabilidade:** O sistema deve ser robusto e capaz de lidar com entradas inválidas de forma adequada.
+- Suporte para mais cidades.
+- Interface gráfica.
+- Opções de exportação de resultados.
+- Adição de novas características para batalha.
 
----
-
-Boa sorte no desenvolvimento deste desafio e aproveite para aprender e se divertir enquanto progride pelos níveis!
-
-Equipe de Ensino - MateCheck
+Divirta-se com o Super Trunfo de Cidades e descubra qual cidade é a grande campeã!

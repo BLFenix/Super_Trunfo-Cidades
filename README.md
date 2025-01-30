@@ -111,10 +111,10 @@ Agradecemos às seguintes pessoas que contribuíram para este projeto:
 <table>
   <tr>
     <td align="center">
-      <a href="#" title="defina o título do link">
+      <a href="#" title="Gabriel Ramos">
         <img src="https://avatars.githubusercontent.com/u/00000000" width="100px;" alt="Foto do Contribuidor"/><br>
         <sub>
-          <b>Seu Nome</b>
+          <b>Gabriel Ramos</b>
         </sub>
       </a>
     </td>

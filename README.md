@@ -102,8 +102,8 @@ Agradecemos às seguintes pessoas que contribuíram para este projeto:
 <table>
   <tr>
     <td align="center">
-      <a href="#" title="Gabriel">
-        <img src="https://github.com/BLFenix" width="100px;" alt="Ignorar/Imagem do WhatsApp de 2025-01-30 à(s) 12.09.45_a86b36e6.jpg"/><br>
+      <a href="https://github.com/BLFenix" title="Perfil no GitHub">
+        <img src="https://github.com/BLFenix.png" width="100px;" alt="Foto do Contribuidor"/><br>
         <sub>
           <b>Gabriel Ramos</b>
         </sub>

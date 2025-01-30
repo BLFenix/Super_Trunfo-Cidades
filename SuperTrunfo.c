@@ -260,29 +260,30 @@ int main()
 
                 // Seleção das cartas que irão batalhar
 
-            SelecionarCartasBatalha:
-
-                printf("\nDigite, a seguir, os códigos das cartas que deseja que batalhem:\n");
-                scanf(" %3s %3s", CodBatalha1, CodBatalha2);
-
-                for (int i = 0; i < NumCidades; i++)
+                do
                 {
-                    if (strcmp(CodBatalha1, cidades[i].Codigo) == 0)
+                    printf("\nDigite, a seguir, os códigos das cartas que deseja que batalhem:\n");
+                    scanf(" %3s %3s", CodBatalha1, CodBatalha2);
+
+                    for (int i = 0; i < NumCidades; i++)
                     {
-                        guerreira1 = cidades[i];
-                        Encontrou1 = 1;
+                        if (strcmp(CodBatalha1, cidades[i].Codigo) == 0)
+                        {
+                            guerreira1 = cidades[i];
+                            Encontrou1 = 1;
+                        }
+                        else if (strcmp(CodBatalha2, cidades[i].Codigo) == 0)
+                        {
+                            guerreira2 = cidades[i];
+                            Encontrou2 = 1;
+                        }
                     }
-                    else if (strcmp(CodBatalha2, cidades[i].Codigo) == 0)
+                    if (Encontrou1 != 1 || Encontrou2 != 1)
                     {
-                        guerreira2 = cidades[i];
-                        Encontrou2 = 1;
+                        printf("\nErro, código não encontrado, tente novamente!\n");
+                        continue;
                     }
-                }
-                if (Encontrou1 != 1 || Encontrou2 != 1)
-                {
-                    printf("\nErro, código não encontrado, tente novamente!\n");
-                    goto SelecionarCartasBatalha;
-                }
+                } while (Encontrou1 != 1 || Encontrou2 != 1);
 
                 // Amostragem das cartas que irão batalhar
 

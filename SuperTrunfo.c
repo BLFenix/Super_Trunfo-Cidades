@@ -23,6 +23,19 @@ typedef struct
 
 // Criação da função de amostragem de cartas
 
+void Menu(int Menu)
+{
+    switch (Menu)
+    {
+    case 1:
+        /* code */
+        break;
+
+    default:
+        break;
+    }
+}
+
 void ExibirCarta(Cidade cidade)
 {
     printf("\nEstado: %s", cidade.Estado);
@@ -35,14 +48,6 @@ void ExibirCarta(Cidade cidade)
     printf("\nDensidade populacional: %.2f pessoas por Km²", cidade.DensPopulacional);
     printf("\nPIB per capita: R$ %.2f por pessoa", cidade.PIBPerCapita);
     printf("\nSuper poder:  %.2f pontos\n\n", cidade.SuperPoder);
-}
-
-void ParaMaiuscula(char Variavel[])
-{
-    for (int i = 0; Variavel[i] != '\0'; i++)
-    {
-        Variavel[i] = toupper(Variavel[i]);
-    }
 }
 
 // Função que mostra o resultado das batalhas
@@ -65,6 +70,66 @@ void MostrarResultadoBatalha(char Bat_Carac[50], float Bat_Campo1, float Bat_Cam
     }
 }
 
+// Função que mostra as regras
+
+void exibirRegras()
+{
+    printf("=== Regras do Jogo Super Trunfo - Países ===\n\n");
+
+    printf("Objetivo do Jogo:\n");
+    printf("- O objetivo do jogo é comparar cartas de cidades e determinar a vencedora com base em atributos como:\n");
+    printf("- População\n");
+    printf("- Área\n");
+    printf("- PIB\n");
+    printf("- Número de Pontos Turísticos\n");
+    printf("- Densidade Populacional (onde a menor densidade é vantajosa)\n\n");
+
+    printf("Como Jogar:\n");
+    printf("1. Cadastro das Cartas:\n");
+    printf("- Você vai cadastrar várias cartas com informações sobre diferentes cidades.\n");
+    printf("- Cada carta possui os seguintes atributos:\n");
+    printf("- Estado\n");
+    printf("- Código da Carta\n");
+    printf("- Nome da Cidade\n");
+    printf("- População\n");
+    printf("- Área\n");
+    printf("- PIB\n");
+    printf("- Número de Pontos Turísticos\n");
+    printf("- Densidade Populacional (onde a menor densidade é vantajosa)\n\n");
+
+    printf("2. Escolha do Atributo para Comparação:\n");
+    printf("- Você escolherá um atributo para comparar entre duas cartas.\n");
+    printf("- No nível Novato, o atributo é fixo, mas em níveis mais avançados, você pode escolher.\n\n");
+
+    printf("3. Comparação das Cartas:\n");
+    printf("- O sistema irá comparar duas cartas com base no atributo escolhido.\n");
+    printf("- A carta com o maior valor (ou menor, no caso da densidade populacional) vence.\n");
+    printf("- Em caso de empate, será exibido uma mensagem dizendo que houve um empate.\n\n");
+
+    printf("4. Exibição dos Resultados:\n");
+    printf("- Após a comparação, o sistema exibirá qual carta venceu.\n");
+    printf("- Será mostrado o valor do atributo utilizado na comparação.\n\n");
+
+    printf("5. Reiniciar ou Continuar:\n");
+    printf("- Após cada rodada, você pode fazer uma nova comparação, cadastrar mais cartas ou encerrar o jogo.\n\n");
+
+    printf("Regras Específicas de Comparação:\n");
+    printf("- Para os atributos: População, Área e PIB: a carta com o maior valor vence.\n");
+    printf("- Para Densidade Populacional: a carta com a menor densidade vence (mais espaço por pessoa).\n");
+    printf("- Para o Número de Pontos Turísticos: a cidade com o maior número vence.\n\n");
+
+    printf("Empates:\n");
+    printf("- Se o valor do atributo for o mesmo para ambas as cartas, haverá um empate.\n");
+    printf("- O sistema pode pedir para você escolher outro critério ou realizar uma nova rodada.\n\n");
+
+    printf("Finalização do Jogo:\n");
+    printf("- O jogo continuará até você decidir parar ou todas as cartas serem comparadas.\n");
+    printf("- Ao final, você verá um resumo das vitórias, empates e derrotas.\n\n");
+
+    printf("===========================================\n\n");
+    printf("Boa sorte e divirta-se jogando Super Trunfo - Países!\n\n");
+}
+
 int main()
 {
     setlocale(LC_ALL, "Portuguese");
@@ -73,164 +138,194 @@ int main()
     Cidade guerreira1;
     Cidade guerreira2;
 
-    int NumCidades, QuantCaracBat, NumCaracBat;
+    int NumCidades, QuantCaracBat, NumCaracBat, Menu, Encontrou1, Encontrou2;
     float Bat_Campo1, Bat_Campo2;
-    char CodBatalha1[4], CodBatalha2[4], JogNovam[2] = "Y", CriaCarta[2] = "Y", VisuCartas[2], Bat_Carac[50], Bat_Nome1[20], Bat_Nome2[20];
-    int Guer1_PTS = 0, Guer2_PTS = 0;
+    char CodBatalha1[4], CodBatalha2[4], Bat_Carac[50], Bat_Nome1[20], Bat_Nome2[20];
+    int Guer1_PTS, Guer2_PTS;
 
     printf("\n**** Seja bem vindo ao Super Trunfo! ****");
 
-    // Só permite ao usuário cadastrar cidades no limite estabelecido
+    printf("\nDiga-me, o que desejas:\n1 - Jogar\n2 - Ver as regras\n3 - Finalizar jogo\n");
+    scanf(" %d", &Menu);
 
-    do
+    switch (Menu)
     {
-        printf("\nQuantas cidades deseja cadastrar? (Max.: %d) \n", MAX_CIDADES);
-        scanf(" %d", &NumCidades);
+    case 1:
+    CriarCarta:
 
-        if (NumCidades < 1 || NumCidades > MAX_CIDADES)
+        // Só permite ao usuário cadastrar cidades no limite estabelecido
+
+        do
         {
-            printf("\nO número digitado não respeita o limite!");
-            continue;
-        }
+            printf("\nQuantas cidades deseja cadastrar? (Max.: %d) \n", MAX_CIDADES);
+            scanf(" %d", &NumCidades);
 
-    } while (NumCidades < 1 || NumCidades > MAX_CIDADES);
-
-    // Verificação para saber se o número de cidades a cadastrar respeita a lógica
-
-    while (strcmp(CriaCarta, "Y") == 0)
-    {
-
-        // Coleta dos dados das cidades.
-
-        for (int i = 0; i < NumCidades; i++)
-        {
-            printf("\nCrie uma carta a seguir:\n\n");
-
-            printf("\nEstado: ");
-            scanf(" %19[^\n]", cidades[i].Estado);
-
-            printf("\nNome: ");
-            scanf(" %19[^\n]", cidades[i].Nome);
-
-            printf("\nCódigo:(Ex.: A01, A02) ");
-            scanf(" %3s", cidades[i].Codigo);
-
-            printf("\nPopulação: ");
-            scanf(" %d", &cidades[i].Populacao);
-
-            printf("\nÁrea: (Em Km²)");
-            scanf(" %f", &cidades[i].Area);
-
-            printf("\nPIB: (Em R$)");
-            scanf(" %f", &cidades[i].PIB);
-
-            printf("\nNúmero de pontos turísticos: ");
-            scanf(" %d", &cidades[i].NumPonTuristicos);
-
-            cidades[i].DensPopulacional = (float)cidades[i].Populacao / cidades[i].Area;
-            cidades[i].PIBPerCapita = (float)cidades[i].PIB / cidades[i].Populacao;
-            cidades[i].SuperPoder = (float)cidades[i].Populacao + cidades[i].Area + cidades[i].PIB + cidades[i].NumPonTuristicos + cidades[i].DensPopulacional + cidades[i].PIBPerCapita;
-
-            printf("\nCidade cadastrada! Dados exibidos a seguir:");
-
-            ExibirCarta(cidades[i]);
-        }
-
-        if (NumCidades < 2)
-        {
-            printf("\nPara conseguir batalhar com as cartas, deve-se ter pelo menos duas.\n\n");
-        }
-
-        while (strcmp(JogNovam, "Y") == 0 && NumCidades > 2) // Serve para finalizar o código quando a pessoa não quiser mais jogar
-        {
-            Guer1_PTS = 0;
-            Guer2_PTS = 0;
-
-            // Amostragem das cartas criadas
-
-            printf("\n**** Ok! Vamos agora pôr as cidades em batalha! ****\n");
-
-            printf("\nGostaria de ver as cartas completas ou apenas seus nome e código? \n('C' para completa, outro para nome e código) \n");
-            scanf(" %1s", VisuCartas);
-            ParaMaiuscula(VisuCartas);
-
-            // Verificação se a pessoa quer visualizar apenas o nome, ou as cartas completas.
-
-            if (strcmp(VisuCartas, "C") == 0)
+            if (NumCidades < 1 || NumCidades > MAX_CIDADES)
             {
-                printf("\nA seguir, estão as cartas criadas:\n");
-
-                for (int i = 0; i < NumCidades; i++)
-                {
-                    ExibirCarta(cidades[i]);
-                }
-            }
-            else
-            {
-                printf("\nA seguir, estão as cartas criadas:\n");
-
-                for (int i = 0; i < NumCidades; i++)
-                {
-                    printf("\nNome da carta: %s\n", cidades[i].Nome);
-                    printf("Código da carta: %s\n", cidades[i].Codigo);
-                }
+                printf("\nO número digitado não respeita o limite!");
+                continue;
             }
 
-            // Seleção das cartas que irão batalhar
+        } while (NumCidades < 1 || NumCidades > MAX_CIDADES);
 
-            printf("\nDigite, a seguir, os códigos das cartas que deseja que batalhem:\n");
-            scanf(" %3s %3s", CodBatalha1, CodBatalha2);
+        // Verificação para saber se o número de cidades a cadastrar respeita a lógica
+
+        while (Menu == 1)
+        {
+
+            // Coleta dos dados das cidades.
 
             for (int i = 0; i < NumCidades; i++)
             {
-                if (strcmp(CodBatalha1, cidades[i].Codigo) == 0)
-                {
-                    guerreira1 = cidades[i];
-                }
-                else if (strcmp(CodBatalha2, cidades[i].Codigo) == 0)
-                {
-                    guerreira2 = cidades[i];
-                }
+                printf("\nCrie uma carta a seguir:\n\n");
+
+                printf("\nEstado: ");
+                scanf(" %19[^\n]", cidades[i].Estado);
+
+                printf("\nNome: ");
+                scanf(" %19[^\n]", cidades[i].Nome);
+
+                printf("\nCódigo:(Ex.: A01, A02) ");
+                scanf(" %3s", cidades[i].Codigo);
+
+                printf("\nPopulação: ");
+                scanf(" %d", &cidades[i].Populacao);
+
+                printf("\nÁrea: (Em Km²)");
+                scanf(" %f", &cidades[i].Area);
+
+                printf("\nPIB: (Em R$)");
+                scanf(" %f", &cidades[i].PIB);
+
+                printf("\nNúmero de pontos turísticos: ");
+                scanf(" %d", &cidades[i].NumPonTuristicos);
+
+                cidades[i].DensPopulacional = (float)cidades[i].Populacao / cidades[i].Area;
+                cidades[i].PIBPerCapita = (float)cidades[i].PIB / cidades[i].Populacao;
+                cidades[i].SuperPoder = (float)cidades[i].Populacao + cidades[i].Area + cidades[i].PIB + cidades[i].NumPonTuristicos + cidades[i].DensPopulacional + cidades[i].PIBPerCapita;
+
+                printf("\nCidade cadastrada! Dados exibidos a seguir:");
+
+                ExibirCarta(cidades[i]);
             }
 
-            // Amostragem das cartas que irão batalhar
-
-            printf("\nLogo abaixo estão nossas cartas guerreiras:\n");
-
-            printf("\n**** Primeira desafiante: ****\n");
-
-            ExibirCarta(guerreira1);
-
-            printf("\n**** Segunda desafiante: ****\n");
-
-            ExibirCarta(guerreira2);
-
-            // Só permite ao usuário selecionar as características no limite estabelecido
-
-            do
+            if (NumCidades < 2)
             {
-                printf("\nQuantas características você deseja colocar em batalha? (1 a 7)");
-                scanf(" %d", &QuantCaracBat);
+                printf("\nPara conseguir batalhar com as cartas, deve-se ter pelo menos duas.\n");
+                printf("\nO que gostaria de fazer?\n1 - Criar novas cartas\n2 - Finalizar o jogo)\n");
+                scanf(" %d", &Menu);
 
-                if (QuantCaracBat < 1 || QuantCaracBat > 7)
+                switch (Menu)
                 {
-                    printf("\nA quantidade fornecida não respeita o limite!");
-                    continue;
-                }
-
-            } while (QuantCaracBat < 1 || QuantCaracBat > 7);
-
-            int ListCaracBat[QuantCaracBat];
-
-            if (QuantCaracBat == 7)
-            {
-                for (int i = 0; i < QuantCaracBat; i++)
-                {
-                    ListCaracBat[i] = i + 1;
+                case 1:
+                    goto CriarCarta;
+                    break;
+                case 2:
+                    goto Finalizar;
+                    break;
+                default:
+                    break;
                 }
             }
             else
             {
+                Menu = 3;
+            }
+
+        Batalhar:
+
+            while (Menu == 3 && NumCidades >= 2)
+            {
+                Guer1_PTS = 0;
+                Guer2_PTS = 0;
+
+                // Amostragem das cartas criadas
+
+                printf("\n**** Ok! Vamos agora pôr as cidades em batalha! ****\n");
+
+                printf("\nGostaria de ver as cartas completas ou apenas seus nome e código?\n1 - Completa\n2 - Nome e código) \n");
+                scanf(" %d", &Menu);
+
+                // Verificação se a pessoa quer visualizar apenas o nome, ou as cartas completas.
+
+                switch (Menu)
+                {
+                case 1:
+                    printf("\nA seguir, estão as cartas criadas:\n");
+
+                    for (int i = 0; i < NumCidades; i++)
+                    {
+                        ExibirCarta(cidades[i]);
+                    }
+                    break;
+                case 2:
+                    printf("\nA seguir, estão as cartas criadas:\n");
+
+                    for (int i = 0; i < NumCidades; i++)
+                    {
+                        printf("\nNome da carta: %s\n", cidades[i].Nome);
+                        printf("Código da carta: %s\n", cidades[i].Codigo);
+                    }
+                    break;
+                default:
+                    break;
+                }
+
+                // Seleção das cartas que irão batalhar
+
+            SelecionarCartasBatalha:
+
+                printf("\nDigite, a seguir, os códigos das cartas que deseja que batalhem:\n");
+                scanf(" %3s %3s", CodBatalha1, CodBatalha2);
+
+                for (int i = 0; i < NumCidades; i++)
+                {
+                    if (strcmp(CodBatalha1, cidades[i].Codigo) == 0)
+                    {
+                        guerreira1 = cidades[i];
+                        Encontrou1 = 1;
+                    }
+                    else if (strcmp(CodBatalha2, cidades[i].Codigo) == 0)
+                    {
+                        guerreira2 = cidades[i];
+                        Encontrou2 = 1;
+                    }
+                }
+                if (Encontrou1 != 1 || Encontrou2 != 1)
+                {
+                    printf("\nErro, código não encontrado, tente novamente!\n");
+                    goto SelecionarCartasBatalha;
+                }
+
+                // Amostragem das cartas que irão batalhar
+
+                printf("\nLogo abaixo estão nossas cartas guerreiras:\n");
+
+                printf("\n**** Primeira desafiante: ****\n");
+
+                ExibirCarta(guerreira1);
+
+                printf("\n**** Segunda desafiante: ****\n");
+
+                ExibirCarta(guerreira2);
+
+                // Só permite ao usuário selecionar as características no limite estabelecido
+
+                do
+                {
+                    printf("\nQuantas características você deseja colocar em batalha? (1 a 7)");
+                    scanf(" %d", &QuantCaracBat);
+
+                    if (QuantCaracBat < 1 || QuantCaracBat > 7)
+                    {
+                        printf("\nA quantidade fornecida não respeita o limite!");
+                        continue;
+                    }
+
+                } while (QuantCaracBat < 1 || QuantCaracBat > 7);
+
+                int ListCaracBat[QuantCaracBat];
+
                 printf("\nAnalise as características e, à seguir, escolha segundo a quantidade selecionada:\n");
                 printf("\n1 - População");
                 printf("\n2 - Area");
@@ -347,29 +442,37 @@ int main()
                 {
                     printf("\nHouve um empate na competição: A pontuação de ambas as cidades foi igual a %d\n\n", Guer1_PTS);
                 }
-            }
 
-            printf("\nGostaria de realizar outra batalha dentre as cartas criadas? ('Y' para sim ou 'N' para criar novas cartas ou finalizar o jogo)\n\n");
-            scanf(" %1s", JogNovam);
-            ParaMaiuscula(JogNovam);
+                printf("\nEscolha, agora, sua próxima ação:\n1 - Para criar novas cartas\n2 - Para finalizar o jogo\n3 - Para batalhar novamente)\n");
+                scanf(" %d", &Menu);
 
-            if (strcmp(JogNovam, "N") == 0)
-            {
-                printf("\nJogo Finalizado!\n\n");
-                break;
+                switch (Menu)
+                {
+                case 1:
+                    goto CriarCarta;
+                    break;
+                case 2:
+                    goto Finalizar;
+                    break;
+                case 3:
+                    goto Batalhar;
+                    break;
+                default:
+                    break;
+                }
             }
         }
-
-        printf("\nGostaria de criar novas cartas? ('Y' para sim ou 'N' para finalizar o jogo)\n\n");
-        scanf(" %1s", CriaCarta);
-        ParaMaiuscula(CriaCarta);
-
-        if (strcmp(CriaCarta, "N") == 0)
-        {
-            printf("\nJogo Finalizado!\n\n");
-            break;
-        }
+        return 0;
+        break;
+    case 2:
+        exibirRegras();
+        break;
+    case 3:
+        goto Finalizar;
+        break;
+    default:
+        break;
     }
-
+Finalizar:
     return 0;
 }

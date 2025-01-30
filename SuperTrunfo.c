@@ -23,19 +23,6 @@ typedef struct
 
 // Criação da função de amostragem de cartas
 
-void Menu(int Menu)
-{
-    switch (Menu)
-    {
-    case 1:
-        /* code */
-        break;
-
-    default:
-        break;
-    }
-}
-
 void ExibirCarta(Cidade cidade)
 {
     printf("\nEstado: %s", cidade.Estado);

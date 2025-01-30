@@ -220,14 +220,17 @@ int main()
 
             } while (QuantCaracBat < 1 || QuantCaracBat > 7);
 
+            int ListCaracBat[QuantCaracBat];
+
             if (QuantCaracBat == 7)
             {
-                /* code */
+                for (int i = 0; i < QuantCaracBat; i++)
+                {
+                    ListCaracBat[i] = i + 1;
+                }
             }
             else
             {
-                int ListCaracBat[QuantCaracBat];
-
                 printf("\nAnalise as características e, à seguir, escolha segundo a quantidade selecionada:\n");
                 printf("\n1 - População");
                 printf("\n2 - Area");

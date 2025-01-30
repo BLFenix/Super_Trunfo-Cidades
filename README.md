@@ -122,9 +122,9 @@ Quer fazer parte desse projeto? Clique [AQUI](CONTRIBUTING.md) e leia como contr
 Estado: São Paulo
 Nome: Campinas
 Código: A01
-População: 1.223.237 pessoas
+População: 1223237 pessoas
 Área: 795.69 km²
-PIB: R$ 128.987,32
+PIB: R$ 128987.32
 Pontos turísticos: 5
 Densidade populacional: 1536.48 pessoas por km²
 PIB per capita: R$ 105.45 por pessoa

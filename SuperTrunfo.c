@@ -6,7 +6,68 @@
 
 #define MAX_CIDADES 8
 
-// Criação da estrutura que armazenará as cidades
+// Função que mostra as regras:
+
+void exibirRegras()
+{
+    printf("=== Regras do Jogo Super Trunfo - Países ===\n\n");
+
+    printf("Objetivo do Jogo:\n");
+    printf("- O objetivo do jogo é comparar cartas de cidades e determinar a vencedora com base em atributos como:\n");
+    printf("- População\n");
+    printf("- Área\n");
+    printf("- PIB\n");
+    printf("- Número de Pontos Turísticos\n");
+    printf("- Densidade Populacional (onde a menor densidade é vantajosa)\n\n");
+
+    printf("Como Jogar:\n");
+    printf("1. Cadastro das Cartas:\n");
+    printf("- Você vai cadastrar várias cartas com informações sobre diferentes cidades.\n");
+    printf("- Cada carta possui os seguintes atributos:\n");
+    printf("- Estado\n");
+    printf("- Código da Carta\n");
+    printf("- Nome da Cidade\n");
+    printf("- População\n");
+    printf("- Área\n");
+    printf("- PIB\n");
+    printf("- Número de Pontos Turísticos\n");
+    printf("- Densidade Populacional (onde a menor densidade é vantajosa)\n\n");
+
+    printf("2. Escolha do Atributo para Comparação:\n");
+    printf("- Você escolherá um atributo para comparar entre duas cartas.\n");
+    printf("- No nível Novato, o atributo é fixo, mas em níveis mais avançados, você pode escolher.\n\n");
+
+    printf("3. Comparação das Cartas:\n");
+    printf("- O sistema irá comparar duas cartas com base no atributo escolhido.\n");
+    printf("- A carta com o maior valor (ou menor, no caso da densidade populacional) vence.\n");
+    printf("- Em caso de empate, será exibido uma mensagem dizendo que houve um empate.\n\n");
+
+    printf("4. Exibição dos Resultados:\n");
+    printf("- Após a comparação, o sistema exibirá qual carta venceu.\n");
+    printf("- Será mostrado o valor do atributo utilizado na comparação.\n\n");
+
+    printf("5. Reiniciar ou Continuar:\n");
+    printf("- Após cada rodada, você pode fazer uma nova comparação, cadastrar mais cartas ou encerrar o jogo.\n\n");
+
+    printf("Regras Específicas de Comparação:\n");
+    printf("- Para os atributos: População, Área e PIB: a carta com o maior valor vence.\n");
+    printf("- Para Densidade Populacional: a carta com a menor densidade vence (mais espaço por pessoa).\n");
+    printf("- Para o Número de Pontos Turísticos: a cidade com o maior número vence.\n\n");
+
+    printf("Empates:\n");
+    printf("- Se o valor do atributo for o mesmo para ambas as cartas, haverá um empate.\n");
+    printf("- O sistema pode pedir para você escolher outro critério ou realizar uma nova rodada.\n\n");
+
+    printf("Finalização do Jogo:\n");
+    printf("- O jogo continuará até você decidir parar ou todas as cartas serem comparadas.\n");
+    printf("- Ao final, você verá um resumo das vitórias, empates e derrotas.\n\n");
+
+    printf("===========================================\n\n");
+    printf("Boa sorte e divirta-se jogando Super Trunfo - Países!\n\n");
+    printf("Agora, vamos jogar!\n\n");
+}
+
+// Struct que armazenará as cidades:
 
 typedef struct
 {
@@ -22,7 +83,64 @@ typedef struct
     float SuperPoder;
 } Cidade;
 
-// Criação da função de amostragem de cartas
+// Função que cadastra as cartas:
+
+void CriarCarta(int *NumCidades, Cidade cidades[])
+{
+
+    // Só permite ao usuário cadastrar cidades no limite estabelecido
+
+    do
+    {
+        printf("\nQuantas cidades deseja cadastrar? (Max.: %d) \n", MAX_CIDADES);
+        scanf(" %d", &*NumCidades);
+
+        if (*NumCidades < 1 || *NumCidades > MAX_CIDADES)
+        {
+            printf("\nO número digitado não respeita o limite!");
+            continue;
+        }
+
+    } while (*NumCidades < 1 || *NumCidades > MAX_CIDADES);
+
+    // Coleta dos dados das cidades.
+
+    for (int i = 0; i < *NumCidades; i++)
+    {
+        printf("\nCrie uma carta a seguir:\n\n");
+
+        printf("\nEstado: ");
+        scanf(" %20[^\n]", cidades[i].Estado);
+
+        printf("\nNome da cidade: ");
+        scanf(" %20[^\n]", cidades[i].Nome);
+
+        printf("\nCódigo:(Ex.: A01, A02) ");
+        scanf(" %3s", cidades[i].Codigo);
+
+        printf("\nPopulação: ");
+        scanf(" %d", &cidades[i].Populacao);
+
+        printf("\nÁrea: (Em Km²)");
+        scanf(" %f", &cidades[i].Area);
+
+        printf("\nPIB: (Em R$)");
+        scanf(" %f", &cidades[i].PIB);
+
+        printf("\nNúmero de pontos turísticos: ");
+        scanf(" %d", &cidades[i].NumPonTuristicos);
+
+        cidades[i].DensPopulacional = (float)cidades[i].Populacao / cidades[i].Area;
+        cidades[i].PIBPerCapita = (float)cidades[i].PIB / cidades[i].Populacao;
+        cidades[i].SuperPoder = (float)cidades[i].Populacao + cidades[i].Area + cidades[i].PIB + cidades[i].NumPonTuristicos + cidades[i].DensPopulacional + cidades[i].PIBPerCapita;
+
+        printf("\nCidade cadastrada! Dados exibidos a seguir:");
+
+        ExibirCarta(cidades[i]);
+    }
+}
+
+// Função de amostragem de cartas:
 
 void ExibirCarta(Cidade cidade)
 {
@@ -38,7 +156,7 @@ void ExibirCarta(Cidade cidade)
     printf("\nSuper poder:  %.2f pontos\n\n", cidade.SuperPoder);
 }
 
-// Função que mostra o resultado das batalhas
+// Função que mostra o resultado das batalhas:
 
 void MostrarResultadoBatalha(char Bat_Carac[], float Bat_Campo1, float Bat_Campo2, char Bat_Nome1[], char Bat_Nome2[], int *Guer1_PTS, int *Guer2_PTS)
 {
@@ -58,7 +176,7 @@ void MostrarResultadoBatalha(char Bat_Carac[], float Bat_Campo1, float Bat_Campo
     }
 }
 
-// Função que envia os dados para a que mostra os resultados da batalha
+// Função que envia os dados para a que mostra os resultados da batalha:
 
 void RealizarBatalha(int *ListCaracBat, int QuantCaracBat, Cidade guerreira1, Cidade guerreira2, int *Guer1_PTS, int *Guer2_PTS)
 {
@@ -144,7 +262,7 @@ void RealizarBatalha(int *ListCaracBat, int QuantCaracBat, Cidade guerreira1, Ci
     {
         char PalPonto[7] = "Exemplo";
         strcpy(PalPonto, ((*Guer1_PTS) == 1 ? "ponto" : "pontos"));
-        printf("\nA Cidade vencedora da competição é a %s, com %d %s!\n", guerreira1.Codigo, *Guer1_PTS, PalPonto);
+        printf("\nA Cidade vencedora da competição é a %s, com %d %s!\n", guerreira1.Nome, *Guer1_PTS, PalPonto);
         printf("\nTodos os dados da vencedora:\n");
 
         ExibirCarta(guerreira1);
@@ -153,7 +271,7 @@ void RealizarBatalha(int *ListCaracBat, int QuantCaracBat, Cidade guerreira1, Ci
     {
         char PalPonto[7] = "Exemplo";
         strcpy(PalPonto, ((*Guer1_PTS) == 1 ? "ponto" : "pontos"));
-        printf("\nA Cidade vencedora da competição é a %s, com %d %s!\n", guerreira2.Codigo, *Guer2_PTS, PalPonto);
+        printf("\nA Cidade vencedora da competição é a %s, com %d %s!\n", guerreira2.Nome, *Guer2_PTS, PalPonto);
         printf("\nTodos os dados da vencedora:\n");
 
         ExibirCarta(guerreira2);
@@ -162,67 +280,6 @@ void RealizarBatalha(int *ListCaracBat, int QuantCaracBat, Cidade guerreira1, Ci
     {
         printf("\nHouve um empate na competição: A pontuação de ambas as cidades foi igual a %d\n\n", *Guer1_PTS);
     }
-}
-
-// Função que mostra as regras
-
-void exibirRegras()
-{
-    printf("=== Regras do Jogo Super Trunfo - Países ===\n\n");
-
-    printf("Objetivo do Jogo:\n");
-    printf("- O objetivo do jogo é comparar cartas de cidades e determinar a vencedora com base em atributos como:\n");
-    printf("- População\n");
-    printf("- Área\n");
-    printf("- PIB\n");
-    printf("- Número de Pontos Turísticos\n");
-    printf("- Densidade Populacional (onde a menor densidade é vantajosa)\n\n");
-
-    printf("Como Jogar:\n");
-    printf("1. Cadastro das Cartas:\n");
-    printf("- Você vai cadastrar várias cartas com informações sobre diferentes cidades.\n");
-    printf("- Cada carta possui os seguintes atributos:\n");
-    printf("- Estado\n");
-    printf("- Código da Carta\n");
-    printf("- Nome da Cidade\n");
-    printf("- População\n");
-    printf("- Área\n");
-    printf("- PIB\n");
-    printf("- Número de Pontos Turísticos\n");
-    printf("- Densidade Populacional (onde a menor densidade é vantajosa)\n\n");
-
-    printf("2. Escolha do Atributo para Comparação:\n");
-    printf("- Você escolherá um atributo para comparar entre duas cartas.\n");
-    printf("- No nível Novato, o atributo é fixo, mas em níveis mais avançados, você pode escolher.\n\n");
-
-    printf("3. Comparação das Cartas:\n");
-    printf("- O sistema irá comparar duas cartas com base no atributo escolhido.\n");
-    printf("- A carta com o maior valor (ou menor, no caso da densidade populacional) vence.\n");
-    printf("- Em caso de empate, será exibido uma mensagem dizendo que houve um empate.\n\n");
-
-    printf("4. Exibição dos Resultados:\n");
-    printf("- Após a comparação, o sistema exibirá qual carta venceu.\n");
-    printf("- Será mostrado o valor do atributo utilizado na comparação.\n\n");
-
-    printf("5. Reiniciar ou Continuar:\n");
-    printf("- Após cada rodada, você pode fazer uma nova comparação, cadastrar mais cartas ou encerrar o jogo.\n\n");
-
-    printf("Regras Específicas de Comparação:\n");
-    printf("- Para os atributos: População, Área e PIB: a carta com o maior valor vence.\n");
-    printf("- Para Densidade Populacional: a carta com a menor densidade vence (mais espaço por pessoa).\n");
-    printf("- Para o Número de Pontos Turísticos: a cidade com o maior número vence.\n\n");
-
-    printf("Empates:\n");
-    printf("- Se o valor do atributo for o mesmo para ambas as cartas, haverá um empate.\n");
-    printf("- O sistema pode pedir para você escolher outro critério ou realizar uma nova rodada.\n\n");
-
-    printf("Finalização do Jogo:\n");
-    printf("- O jogo continuará até você decidir parar ou todas as cartas serem comparadas.\n");
-    printf("- Ao final, você verá um resumo das vitórias, empates e derrotas.\n\n");
-
-    printf("===========================================\n\n");
-    printf("Boa sorte e divirta-se jogando Super Trunfo - Países!\n\n");
-    printf("Agora, vamos jogar!\n\n");
 }
 
 int main()
@@ -245,61 +302,14 @@ Inicio:
     switch (Menu)
     {
     case 1:
-    CriarCarta:
-
-        // Só permite ao usuário cadastrar cidades no limite estabelecido
-
-        do
-        {
-            printf("\nQuantas cidades deseja cadastrar? (Max.: %d) \n", MAX_CIDADES);
-            scanf(" %d", &NumCidades);
-
-            if (NumCidades < 1 || NumCidades > MAX_CIDADES)
-            {
-                printf("\nO número digitado não respeita o limite!");
-                continue;
-            }
-
-        } while (NumCidades < 1 || NumCidades > MAX_CIDADES);
 
         while (Menu == 1)
         {
+        CriarCarta:
 
-            // Coleta dos dados das cidades.
+            // Chamando a função de criar carta:
 
-            for (int i = 0; i < NumCidades; i++)
-            {
-                printf("\nCrie uma carta a seguir:\n\n");
-
-                printf("\nEstado: ");
-                scanf(" %20[^\n]", cidades[i].Estado);
-
-                printf("\nNome da cidade: ");
-                scanf(" %20[^\n]", cidades[i].Nome);
-
-                printf("\nCódigo:(Ex.: A01, A02) ");
-                scanf(" %3s", cidades[i].Codigo);
-
-                printf("\nPopulação: ");
-                scanf(" %d", &cidades[i].Populacao);
-
-                printf("\nÁrea: (Em Km²)");
-                scanf(" %f", &cidades[i].Area);
-
-                printf("\nPIB: (Em R$)");
-                scanf(" %f", &cidades[i].PIB);
-
-                printf("\nNúmero de pontos turísticos: ");
-                scanf(" %d", &cidades[i].NumPonTuristicos);
-
-                cidades[i].DensPopulacional = (float)cidades[i].Populacao / cidades[i].Area;
-                cidades[i].PIBPerCapita = (float)cidades[i].PIB / cidades[i].Populacao;
-                cidades[i].SuperPoder = (float)cidades[i].Populacao + cidades[i].Area + cidades[i].PIB + cidades[i].NumPonTuristicos + cidades[i].DensPopulacional + cidades[i].PIBPerCapita;
-
-                printf("\nCidade cadastrada! Dados exibidos a seguir:");
-
-                ExibirCarta(cidades[i]);
-            }
+            CriarCarta(&NumCidades, cidades);
 
             // Mínimo duas cidades para jogar
 

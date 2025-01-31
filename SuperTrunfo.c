@@ -2,6 +2,7 @@
 #include <string.h>
 #include <locale.h>
 #include <ctype.h>
+#include <stdlib.h>
 
 #define MAX_CIDADES 8
 
@@ -9,8 +10,8 @@
 
 typedef struct
 {
-    char Estado[20];
-    char Nome[20];
+    char Estado[51];
+    char Nome[51];
     char Codigo[4];
     int Populacao;
     float Area;
@@ -39,21 +40,127 @@ void ExibirCarta(Cidade cidade)
 
 // Função que mostra o resultado das batalhas
 
-void MostrarResultadoBatalha(char Bat_Carac[50], float Bat_Campo1, float Bat_Campo2, char Bat_Nome1[20], char Bat_Nome2[20], int *Guer1_PTS, int *Guer2_PTS)
+void MostrarResultadoBatalha(char Bat_Carac[], float Bat_Campo1, float Bat_Campo2, char Bat_Nome1[], char Bat_Nome2[], int *Guer1_PTS, int *Guer2_PTS)
 {
     if (Bat_Campo1 > Bat_Campo2)
     {
-        printf("\nCidade: %s é a vencedora da competição de %s\n", Bat_Nome1, Bat_Carac);
+        printf("\nA cidade: %s é a vencedora da competição de %s\n", Bat_Nome1, Bat_Carac);
         (*Guer1_PTS)++;
     }
     else if (Bat_Campo2 > Bat_Campo1)
     {
-        printf("\nCidade: %s é a vencedora da competição de %s\n", Bat_Nome2, Bat_Carac);
+        printf("\nA cidade: %s é a vencedora da competição de %s\n", Bat_Nome2, Bat_Carac);
         (*Guer2_PTS)++;
     }
     else
     {
         printf("\n\nHouve um empate na competição de %s: Nenhuma cidade pontuou\n\n", Bat_Carac);
+    }
+}
+
+// Função que envia os dados para a que mostra os resultados da batalha
+
+void RealizarBatalha(int *ListCaracBat, int QuantCaracBat, Cidade guerreira1, Cidade guerreira2, int *Guer1_PTS, int *Guer2_PTS)
+{
+    float Bat_Campo1, Bat_Campo2;
+    char Bat_Carac[51], Bat_Nome1[51], Bat_Nome2[51];
+    // Realizando a batalha entre cada característica das cartas
+
+    printf("\n\n***** A seguir estarão os resultados da batalha de cartas *****\n\n");
+
+    for (int i = 0; i < QuantCaracBat; i++)
+    {
+        switch (ListCaracBat[i])
+        {
+        case 1:
+            strcpy(Bat_Carac, "População");
+            Bat_Campo1 = (float)guerreira1.Populacao;
+            Bat_Campo2 = (float)guerreira2.Populacao;
+            strcpy(Bat_Nome1, guerreira1.Nome);
+            strcpy(Bat_Nome2, guerreira2.Nome);
+            MostrarResultadoBatalha(Bat_Carac, Bat_Campo1, Bat_Campo2, Bat_Nome1, Bat_Nome2, Guer1_PTS, Guer2_PTS);
+            break;
+        case 2:
+            strcpy(Bat_Carac, "Área");
+            Bat_Campo1 = guerreira1.Area;
+            Bat_Campo2 = guerreira2.Area;
+            strcpy(Bat_Nome1, guerreira1.Nome);
+            strcpy(Bat_Nome2, guerreira2.Nome);
+            MostrarResultadoBatalha(Bat_Carac, Bat_Campo1, Bat_Campo2, Bat_Nome1, Bat_Nome2, Guer1_PTS, Guer2_PTS);
+            break;
+        case 3:
+            strcpy(Bat_Carac, "PIB");
+            Bat_Campo1 = guerreira1.PIB;
+            Bat_Campo2 = guerreira2.PIB;
+            strcpy(Bat_Nome1, guerreira1.Nome);
+            strcpy(Bat_Nome2, guerreira2.Nome);
+            MostrarResultadoBatalha(Bat_Carac, Bat_Campo1, Bat_Campo2, Bat_Nome1, Bat_Nome2, Guer1_PTS, Guer2_PTS);
+            break;
+        case 4:
+            strcpy(Bat_Carac, "Número De Pontos Turísticos");
+            Bat_Campo1 = (float)guerreira1.NumPonTuristicos;
+            Bat_Campo2 = (float)guerreira2.NumPonTuristicos;
+            strcpy(Bat_Nome1, guerreira1.Nome);
+            strcpy(Bat_Nome2, guerreira2.Nome);
+            MostrarResultadoBatalha(Bat_Carac, Bat_Campo1, Bat_Campo2, Bat_Nome1, Bat_Nome2, Guer1_PTS, Guer2_PTS);
+            break;
+        case 5:
+            strcpy(Bat_Carac, "Densidade Populacional");
+            Bat_Campo1 = guerreira2.DensPopulacional; // Densidades populacionais trocadas, pois a densidade vencedora é a menor
+            Bat_Campo2 = guerreira1.DensPopulacional; // Densidades populacionais trocadas, pois a densidade vencedora é a menor
+            strcpy(Bat_Nome1, guerreira1.Nome);
+            strcpy(Bat_Nome2, guerreira2.Nome);
+            MostrarResultadoBatalha(Bat_Carac, Bat_Campo1, Bat_Campo2, Bat_Nome1, Bat_Nome2, Guer1_PTS, Guer2_PTS);
+            break;
+        case 6:
+            strcpy(Bat_Carac, "PIB Per Capita");
+            Bat_Campo1 = guerreira1.PIBPerCapita;
+            Bat_Campo2 = guerreira2.PIBPerCapita;
+            strcpy(Bat_Nome1, guerreira1.Nome);
+            strcpy(Bat_Nome2, guerreira2.Nome);
+            MostrarResultadoBatalha(Bat_Carac, Bat_Campo1, Bat_Campo2, Bat_Nome1, Bat_Nome2, Guer1_PTS, Guer2_PTS);
+            break;
+        case 7:
+            strcpy(Bat_Carac, "Super Poder");
+            Bat_Campo1 = guerreira1.SuperPoder;
+            Bat_Campo2 = guerreira2.SuperPoder;
+            strcpy(Bat_Nome1, guerreira1.Nome);
+            strcpy(Bat_Nome2, guerreira2.Nome);
+            MostrarResultadoBatalha(Bat_Carac, Bat_Campo1, Bat_Campo2, Bat_Nome1, Bat_Nome2, Guer1_PTS, Guer2_PTS);
+            break;
+
+        default:
+            break;
+        }
+    }
+
+    // Limpando os dados da lista
+
+    free(ListCaracBat);
+
+    // Amostragem da carta vencedora
+
+    if (*Guer1_PTS > *Guer2_PTS)
+    {
+        char PalPonto[7] = "Exemplo";
+        strcpy(PalPonto, ((*Guer1_PTS) == 1 ? "ponto" : "pontos"));
+        printf("\nA Cidade vencedora da competição é a %s, com %d %s!\n", guerreira1.Codigo, *Guer1_PTS, PalPonto);
+        printf("\nTodos os dados da vencedora:\n");
+
+        ExibirCarta(guerreira1);
+    }
+    else if (*Guer2_PTS > *Guer1_PTS)
+    {
+        char PalPonto[7] = "Exemplo";
+        strcpy(PalPonto, ((*Guer1_PTS) == 1 ? "ponto" : "pontos"));
+        printf("\nA Cidade vencedora da competição é a %s, com %d %s!\n", guerreira2.Codigo, *Guer2_PTS, PalPonto);
+        printf("\nTodos os dados da vencedora:\n");
+
+        ExibirCarta(guerreira2);
+    }
+    else
+    {
+        printf("\nHouve um empate na competição: A pontuação de ambas as cidades foi igual a %d\n\n", *Guer1_PTS);
     }
 }
 
@@ -115,6 +222,7 @@ void exibirRegras()
 
     printf("===========================================\n\n");
     printf("Boa sorte e divirta-se jogando Super Trunfo - Países!\n\n");
+    printf("Agora, vamos jogar!\n\n");
 }
 
 int main()
@@ -125,10 +233,9 @@ int main()
     Cidade guerreira1;
     Cidade guerreira2;
 
-    int NumCidades, QuantCaracBat, NumCaracBat, Menu, Encontrou1, Encontrou2;
-    float Bat_Campo1, Bat_Campo2;
-    char CodBatalha1[4], CodBatalha2[4], Bat_Carac[50], Bat_Nome1[20], Bat_Nome2[20];
-    int Guer1_PTS, Guer2_PTS;
+    int NumCidades, QuantCaracBat, Menu;
+
+Inicio:
 
     printf("\n**** Seja bem vindo ao Super Trunfo! ****");
 
@@ -155,8 +262,6 @@ int main()
 
         } while (NumCidades < 1 || NumCidades > MAX_CIDADES);
 
-        // Verificação para saber se o número de cidades a cadastrar respeita a lógica
-
         while (Menu == 1)
         {
 
@@ -167,10 +272,10 @@ int main()
                 printf("\nCrie uma carta a seguir:\n\n");
 
                 printf("\nEstado: ");
-                scanf(" %19[^\n]", cidades[i].Estado);
+                scanf(" %20[^\n]", cidades[i].Estado);
 
-                printf("\nNome: ");
-                scanf(" %19[^\n]", cidades[i].Nome);
+                printf("\nNome da cidade: ");
+                scanf(" %20[^\n]", cidades[i].Nome);
 
                 printf("\nCódigo:(Ex.: A01, A02) ");
                 scanf(" %3s", cidades[i].Codigo);
@@ -201,7 +306,7 @@ int main()
             if (NumCidades < 2)
             {
                 printf("\nPara conseguir batalhar com as cartas, deve-se ter pelo menos duas.\n");
-                printf("\nO que gostaria de fazer?\n1 - Criar novas cartas\n2 - Finalizar o jogo)\n");
+                printf("\nO que gostaria de fazer?\n1 - Criar novas cartas\n2 - Finalizar o jogo\n");
                 scanf(" %d", &Menu);
 
                 switch (Menu)
@@ -225,14 +330,14 @@ int main()
 
             while (Menu == 3 && NumCidades >= 2)
             {
-                Guer1_PTS = 0;
-                Guer2_PTS = 0;
+                int Guer1_PTS = 0;
+                int Guer2_PTS = 0;
 
                 // Amostragem das cartas criadas
 
                 printf("\n**** Ok! Vamos agora pôr as cidades em batalha! ****\n");
 
-                printf("\nGostaria de ver as cartas completas ou apenas seus nome e código?\n1 - Completa\n2 - Nome e código) \n");
+                printf("\nGostaria de ver as cartas completas ou apenas seus nome e código?\n1 - Completa\n2 - Nome e código \n");
                 scanf(" %d", &Menu);
 
                 // Verificação se a pessoa quer visualizar apenas o nome, ou as cartas completas.
@@ -262,9 +367,14 @@ int main()
 
                 // Seleção das cartas que irão batalhar
 
+                int Encontrou1 = 0;
+                int Encontrou2 = 0;
+
                 do
                 {
-                    printf("\nDigite, a seguir, os códigos das cartas que deseja que batalhem:\n");
+                    char CodBatalha1[4], CodBatalha2[4];
+
+                    printf("\nDigite, a seguir, os códigos das cartas que deseja que batalhem: (Digite o primeiro, pressione enter e digite o segundo)\n");
                     scanf(" %3s %3s", CodBatalha1, CodBatalha2);
 
                     for (int i = 0; i < NumCidades; i++)
@@ -314,143 +424,97 @@ int main()
 
                 } while (QuantCaracBat < 1 || QuantCaracBat > 7);
 
-                int ListCaracBat[QuantCaracBat];
+                // Deixando a lista com o tamanho certo permanentemente
 
-                // Dá as opções de características a se escolher
-
-                printf("\nAnalise as características e, à seguir, escolha segundo a quantidade selecionada:\n");
-                printf("\n1 - População");
-                printf("\n2 - Area");
-                printf("\n3 - PIB");
-                printf("\n4 - Número de pontos turísticos");
-                printf("\n5 - Densidade populacional");
-                printf("\n6 - PIB per capita");
-                printf("\n7 - Super poder\n");
-
-                // Adicionando à lista as características que serão usadas na batalha
-
-                for (int i = 0; i < QuantCaracBat; i++)
+                int *ListCaracBat = (int *)malloc(QuantCaracBat * 4);
+                if (ListCaracBat == NULL)
                 {
-                    do
-                    {
-                        printf("\nDigite o número da %d característica: ", i + 1);
-                        scanf(" %d", &NumCaracBat);
-
-                        if (NumCaracBat < 1 || NumCaracBat > 7)
-                        {
-                            printf("\nO valor fornecido não respeita o limite! (1 a 7)");
-                            continue;
-                        }
-                    } while (NumCaracBat < 1 || NumCaracBat > 7);
-                    ListCaracBat[i] = NumCaracBat;
+                    printf("Erro ao alocar memória!\n");
+                    return 1; // Saída com erro
                 }
 
-                // Realizando a batalha entre cada característica das cartas
+                // If e else que vão delimitar se o usuário quer todas as características ou não, na batalha
 
-                printf("\n\n***** A seguir estarão os resultados da batalha de cartas *****\n\n");
-
-                for (int i = 0; i < QuantCaracBat; i++)
+                if (QuantCaracBat == 7)
                 {
-                    switch (ListCaracBat[i])
+                    for (int i = 0; i < 7; i++)
+                    {
+                        ListCaracBat[i] = i + 1;
+                        printf("\nItem %d: %d \n", i + 1, ListCaracBat[i]);
+                    }
+
+                    RealizarBatalha(ListCaracBat, QuantCaracBat, guerreira1, guerreira2, &Guer1_PTS, &Guer2_PTS);
+
+                    printf("\nEscolha, agora, sua próxima ação:\n1 - Para criar novas cartas\n2 - Para finalizar o jogo\n3 - Para batalhar novamente\n");
+                    scanf(" %d", &Menu);
+                    switch (Menu)
                     {
                     case 1:
-                        strcpy(Bat_Carac, "População");
-                        Bat_Campo1 = guerreira1.Populacao;
-                        Bat_Campo2 = guerreira2.Populacao;
-                        strcpy(Bat_Nome1, guerreira1.Nome);
-                        strcpy(Bat_Nome2, guerreira2.Nome);
-                        MostrarResultadoBatalha(Bat_Carac, Bat_Campo1, Bat_Campo2, Bat_Nome1, Bat_Nome2, &Guer1_PTS, &Guer2_PTS);
+                        goto CriarCarta;
                         break;
                     case 2:
-                        strcpy(Bat_Carac, "Área");
-                        Bat_Campo1 = guerreira1.Area;
-                        Bat_Campo2 = guerreira2.Area;
-                        strcpy(Bat_Nome1, guerreira1.Nome);
-                        strcpy(Bat_Nome2, guerreira2.Nome);
-                        MostrarResultadoBatalha(Bat_Carac, Bat_Campo1, Bat_Campo2, Bat_Nome1, Bat_Nome2, &Guer1_PTS, &Guer2_PTS);
+                        goto Finalizar;
                         break;
                     case 3:
-                        strcpy(Bat_Carac, "PIB");
-                        Bat_Campo1 = guerreira1.PIB;
-                        Bat_Campo2 = guerreira2.PIB;
-                        strcpy(Bat_Nome1, guerreira1.Nome);
-                        strcpy(Bat_Nome2, guerreira2.Nome);
-                        MostrarResultadoBatalha(Bat_Carac, Bat_Campo1, Bat_Campo2, Bat_Nome1, Bat_Nome2, &Guer1_PTS, &Guer2_PTS);
+                        goto Batalhar;
                         break;
-                    case 4:
-                        strcpy(Bat_Carac, "Número De Pontos Turísticos");
-                        Bat_Campo1 = guerreira1.NumPonTuristicos;
-                        Bat_Campo2 = guerreira2.NumPonTuristicos;
-                        strcpy(Bat_Nome1, guerreira1.Nome);
-                        strcpy(Bat_Nome2, guerreira2.Nome);
-                        MostrarResultadoBatalha(Bat_Carac, Bat_Campo1, Bat_Campo2, Bat_Nome1, Bat_Nome2, &Guer1_PTS, &Guer2_PTS);
-                        break;
-                    case 5:
-                        strcpy(Bat_Carac, "Densidade Populacional");
-                        Bat_Campo1 = guerreira2.DensPopulacional; // Densidades populacionais trocadas, pois a densidade vencedora é a menor
-                        Bat_Campo2 = guerreira1.DensPopulacional; // Densidades populacionais trocadas, pois a densidade vencedora é a menor
-                        strcpy(Bat_Nome1, guerreira1.Nome);
-                        strcpy(Bat_Nome2, guerreira2.Nome);
-                        MostrarResultadoBatalha(Bat_Carac, Bat_Campo1, Bat_Campo2, Bat_Nome1, Bat_Nome2, &Guer1_PTS, &Guer2_PTS);
-                        break;
-                    case 6:
-                        strcpy(Bat_Carac, "PIB Per Capita");
-                        Bat_Campo1 = guerreira1.PIBPerCapita;
-                        Bat_Campo2 = guerreira2.PIBPerCapita;
-                        strcpy(Bat_Nome1, guerreira1.Nome);
-                        strcpy(Bat_Nome2, guerreira2.Nome);
-                        MostrarResultadoBatalha(Bat_Carac, Bat_Campo1, Bat_Campo2, Bat_Nome1, Bat_Nome2, &Guer1_PTS, &Guer2_PTS);
-                        break;
-                    case 7:
-                        strcpy(Bat_Carac, "Super Poder");
-                        Bat_Campo1 = guerreira1.SuperPoder;
-                        Bat_Campo2 = guerreira2.SuperPoder;
-                        strcpy(Bat_Nome1, guerreira1.Nome);
-                        strcpy(Bat_Nome2, guerreira2.Nome);
-                        MostrarResultadoBatalha(Bat_Carac, Bat_Campo1, Bat_Campo2, Bat_Nome1, Bat_Nome2, &Guer1_PTS, &Guer2_PTS);
-                        break;
-
                     default:
                         break;
                     }
                 }
-
-                // Amostragem da carta vencedora
-
-                if (Guer1_PTS > Guer2_PTS)
-                {
-                    printf("\nA Cidade vencedora da competição é a %s, com %d pontos!\n", guerreira1.Codigo, Guer1_PTS);
-                    printf("\nTodos os dados da cidade:\n");
-
-                    ExibirCarta(guerreira1);
-                }
-                else if (Guer2_PTS > Guer1_PTS)
-                {
-                    printf("\nA Cidade vencedora da competição é a %s, com %d pontos!\n", guerreira2.Codigo, Guer2_PTS);
-
-                    ExibirCarta(guerreira2);
-                }
                 else
                 {
-                    printf("\nHouve um empate na competição: A pontuação de ambas as cidades foi igual a %d\n\n", Guer1_PTS);
-                }
 
-                printf("\nEscolha, agora, sua próxima ação:\n1 - Para criar novas cartas\n2 - Para finalizar o jogo\n3 - Para batalhar novamente)\n");
-                scanf(" %d", &Menu);
+                    // Dá as opções de características a se escolher
 
-                switch (Menu)
-                {
-                case 1:
-                    goto CriarCarta;
-                    break;
-                case 2:
-                    goto Finalizar;
-                    break;
-                case 3:
-                    goto Batalhar;
-                    break;
-                default:
-                    break;
+                    printf("\nAnalise as características e, à seguir, escolha segundo a quantidade selecionada:\n");
+                    printf("\n1 - População");
+                    printf("\n2 - Area");
+                    printf("\n3 - PIB");
+                    printf("\n4 - Número de pontos turísticos");
+                    printf("\n5 - Densidade populacional");
+                    printf("\n6 - PIB per capita");
+                    printf("\n7 - Super poder\n");
+
+                    // Adicionando à lista as características que serão usadas na batalha
+
+                    for (int i = 0; i < QuantCaracBat; i++)
+                    {
+                        int NumCaracBat;
+                        do
+                        {
+                            printf("\nDigite o número da %d característica: ", i + 1);
+                            scanf(" %d", &NumCaracBat);
+
+                            if (NumCaracBat < 1 || NumCaracBat > 7)
+                            {
+                                printf("\nO valor fornecido não respeita o limite! (1 a 7)");
+                                continue;
+                            }
+                        } while (NumCaracBat < 1 || NumCaracBat > 7);
+                        ListCaracBat[i] = NumCaracBat;
+                    }
+
+                    // Chamando a função para realizar a batalha
+
+                    RealizarBatalha(ListCaracBat, QuantCaracBat, guerreira1, guerreira2, &Guer1_PTS, &Guer2_PTS);
+
+                    printf("\nEscolha, agora, sua próxima ação:\n1 - Para criar novas cartas\n2 - Para finalizar o jogo\n3 - Para batalhar novamente\n");
+                    scanf(" %d", &Menu);
+                    switch (Menu)
+                    {
+                    case 1:
+                        goto CriarCarta;
+                        break;
+                    case 2:
+                        goto Finalizar;
+                        break;
+                    case 3:
+                        goto Batalhar;
+                        break;
+                    default:
+                        break;
+                    }
                 }
             }
         }
@@ -458,6 +522,7 @@ int main()
         break;
     case 2:
         exibirRegras();
+        goto Inicio;
         break;
     case 3:
         goto Finalizar;
@@ -466,5 +531,6 @@ int main()
         break;
     }
 Finalizar:
+    printf("Jogo Finalizado! Obrigado por jogar!");
     return 0;
 }

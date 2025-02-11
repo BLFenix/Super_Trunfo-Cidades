@@ -1,7 +1,7 @@
 # Super Trunfo de Cidades
 
 ![Status do Projeto](https://img.shields.io/badge/Status-Em%20Desenvolvimento-blue?style=for-the-badge&logo=github&logoColor=white&color=blue&labelColor=black) 
-![Linguagens](https://img.shields.io/badge/Linguagens-C%20|%20Outras-informational?style=for-the-badge&color=purple&labelColor=black) 
+![Linguagens](https://img.shields.io/badge/Linguagens-C-informational?style=for-the-badge&color=darkgreen&labelColor=black) 
 ![Tamanho do Repositório](https://img.shields.io/badge/Tamanho%20do%20Repositório-2.3%20MB-success?style=for-the-badge&color=green&labelColor=black) 
 
 > Um jogo interativo em que cidades brasileiras competem com base em características socioeconômicas e territoriais.
